@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" id="app">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <h4>Objective Pool</h4>
@@ -29,12 +29,18 @@
 @endpush
 
 @push('script')
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
     <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="{{ asset('js/home.js') }}"></script>
     <script type="text/javascript">
+        let app = new Vue({
+            el: '#app'
+        });
+
         $(document).ready(function(){
+
             $('#objectivePool').slick({
                 draggable: false,
                 infinite: true,
@@ -47,12 +53,9 @@
                 prevArrow: '<button class="slider-arrow slider-prev btn btn-primary"><i class="fa fa-angle-left"></i></button>'
             });
 
-            $('#objectivePool').on('init', function(event, slick, direction){
-                $(".addToList").click(function() {
-                    alert(1);
-                    var $objective = $("#objective" + $(this).attr('data-id')).html();
-                    $('.dropbox').append($objective);
-                });
+            $(".addToList").click(function() {
+                var $objective = $("#objective" + $(this).attr('data-id')).html();
+                $('.dropbox').append($objective);
             });
         });
     </script>

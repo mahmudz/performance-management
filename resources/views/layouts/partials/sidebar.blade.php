@@ -13,7 +13,7 @@
         @endif
         @if(Auth::user()->type == 3)
             <li><a href="{{ route('home') }}">Objective Pool</a></li>
-            <li><a href="#">My Objectives</a></li>
+            <li><a href="{{ route('my-objectives') }}">My Objectives</a></li>
             <li><a href="{{ route('objectives.create') }}">Create Objective</a></li>
         @endif
 

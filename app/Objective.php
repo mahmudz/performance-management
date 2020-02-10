@@ -14,4 +14,10 @@ class Objective extends Model
             $this->attributes['date_to_be_achived'] = \Carbon\Carbon::parse($date)->format('Y-m-d');
         }
     }
+
+
+    public function getCategoryAttribute()
+    {
+        return 'Default';
+    }
 }

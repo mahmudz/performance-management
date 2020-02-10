@@ -13,13 +13,17 @@ Route::get('/home', 'HomeController@index')
     ->name('home');
 
 Route::resource('objectives', 'ObjectiveController');
+
 Route::get('objectives/{id}/delete', 'ObjectiveController@delete')
         ->name('objectives.delete');
 
-Route::get('/create-objective', 'PageController@createObjective')
-        ->name('create-objective');
-// Route::get('/core-competencies', 'HomeController@index')
-//     ->name('core-competencies');
+Route::get('/objectives/{id}/complete', 'ObjectiveController@getMarkAsComplete')
+        ->name('objectives.complete');
 
-// Route::get('/home', 'HomeController@index')
-//     ->name('home');
+Route::post('/objectives/{id}/complete', 'ObjectiveController@postMarkAsComplete');
+
+Route::get('/my-objectives', 'PageController@myObjectives')
+        ->name('my-objectives');
+
+Route::get('/core-competencies', 'PageController@coreCompetencies')
+    ->name('core-competencies');

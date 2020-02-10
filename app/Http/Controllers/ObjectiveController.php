@@ -22,11 +22,17 @@ class ObjectiveController extends Controller
     public function store(Request $request)
     {
         try {
+            $type = 0;
+            if (\Auth::user()->type == 2) {
+                $type = 1;
+            }
+
             Objective::create(
                 array_merge(
                     $request->except('_token', 'key_result'),
                     [
                         'created_by' => \Auth::id(),
+                        'type' => 1,
                         'key_results' => json_encode($request->key_result)
                     ]
                 ));
@@ -64,5 +70,13 @@ class ObjectiveController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('danger', $e->getMessage());
         }
+    }
+
+
+    public function getMarkAsComplete ($objectiveID)
+    {
+        $objective = Objective::find($objectiveID);
+
+        return view('pages.objective.mark-as-complete', compact('objective'));
     }
 }

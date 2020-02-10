@@ -16,10 +16,11 @@ class CreateObjectivesTable extends Migration
         Schema::create('objectives', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('created_by');
-            $table->integer('colleague_number');
-            $table->string('name');
-            $table->string('role');
-            $table->string('division');
+            $table->boolean('type')->default(false);
+            $table->integer('colleague_number')->nullable();
+            $table->string('name')->nullable();
+            $table->string('role')->nullable();
+            $table->string('division')->nullable();
             $table->string('title');
             $table->text('personal_objective');
             $table->float('current_score');

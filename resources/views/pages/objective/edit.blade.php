@@ -38,7 +38,7 @@
                                         <div class="form-group row">
                                             <label for=""  class="col-md-4 col-form-label">Role</label>
                                             <div class="col-md-8">
-                                                <select name="role" id="" class="form-control" value="{{ $objective->name }}">
+                                                <select name="role" class="form-control">
                                                     <option  {{ ($objective->role == 'Software Engineer') ? 'selected' : '' }}  value="Software Engineer">Software Engineer</option>
                                                     <option  {{ ($objective->role == 'UI Engineer') ? 'selected' : '' }}  value="UI Engineer">UI Engineer</option>
                                                     <option  {{ ($objective->role == 'Product Manager') ? 'selected' : '' }}  value="Product Manager">Product Manager</option>
@@ -48,7 +48,7 @@
                                         <div class="form-group row">
                                             <label for=""  class="col-md-4 col-form-label">Division</label>
                                             <div class="col-md-8">
-                                                <select name="division" id="" class="form-control" value="{{ $objective->name }}">
+                                                <select name="division" class="form-control">
                                                     <option {{ ($objective->division == 'Tech') ? 'selected' : '' }} value="Tech">Tech</option>
                                                     <option {{ ($objective->division == 'Marketing') ? 'selected' : '' }} value="Marketing">Marketing</option>
                                                 </select>
@@ -104,7 +104,7 @@
                                         <div class="form-group row">
                                             <label for=""  class="col-md-5 col-form-label">Date to be achived</label>
                                             <div class="col-md-7">
-                                                <input type="text" class="form-control" value="{{ $objective->date_to_be_achived }}" name="date_to_be_achived">
+                                                <input type="text" id="datetime" class="form-control" value="{{ $objective->date_to_be_achived }}" name="date_to_be_achived">
                                             </div>
                                         </div>
                                     </div>
@@ -122,3 +122,11 @@
     </div>
 </form>
 @endsection
+
+@push('script')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#datetime').datetimepicker();
+    });
+</script>
+@endpush

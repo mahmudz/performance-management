@@ -2,10 +2,12 @@
   position: relative;
   z-index: 9;
 }
+
 .dropbox {
-  height: 250px;
+  min-height: 250px;
   width: 100%;
   border: 4px dotted #ccc;
+  padding: 5px 0px;
 }
 .drop-active{
   background: #eee;
@@ -66,3 +68,4 @@
 .drag-drop.can-drop {
   color: #000;
   background-color: #4e4;
+}
