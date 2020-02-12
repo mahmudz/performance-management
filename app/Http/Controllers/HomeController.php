@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Objective;
 use Illuminate\Http\Request;
+use App\AssignedObjective;
 
 class HomeController extends Controller
 {
@@ -25,14 +27,18 @@ class HomeController extends Controller
     public function index()
     {
         $objectives = Objective::get();
+        $totalObjectives = $objectives->count();
 
-        return view('pages.objective-pool.index', compact('objectives'));
+        $myAssignedObjectives = AssignedObjective::where('colleague_number', Auth::id())->get();
+        $objectives = $objectives->whereNotIn('id', $myAssignedObjectives->pluck('objective_id')->toArray());
+
+        return view('pages.objective-pool.index', compact('objectives', 'myAssignedObjectives', 'totalObjectives'));
     }
 
 
     public function logout()
     {
-        \Auth::logout();
+        Auth::logout();
 
         return redirect()->route('login');
     }

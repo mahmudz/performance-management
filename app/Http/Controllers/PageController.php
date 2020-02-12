@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Objective;
+use App\AssignedObjective;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -17,8 +18,7 @@ class PageController extends Controller
 
     public function myObjectives()
     {
-        $objectives = Objective::where('created_by', Auth::id())
-            ->where('type', 1)
+        $objectives = AssignedObjective::where('colleague_number', Auth::id())
             ->get();
 
         return view('pages.my-objectives.index', compact('objectives'));
@@ -28,5 +28,11 @@ class PageController extends Controller
     public function coreCompetencies()
     {
         return view('pages.core-competencies.index');
+    }
+
+
+    public function submissons()
+    {
+        return view('pages.submissons.index');
     }
 }

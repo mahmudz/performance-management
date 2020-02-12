@@ -68,9 +68,15 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label for=""  class="col-md-5 col-form-label">Achived Score</label>
+                                            <div class="col-md-7">
+                                                <input type="text" class="form-control" value="{{ $objective->target_score }}" name="target_score">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for=""  class="col-md-5 col-form-label">Date to be achived</label>
                                             <div class="col-md-7">
-                                                <input id="datetime" class="form-control" value="{{ $objective->date_to_be_achived }}" name="date_to_be_achived">
+                                                <input id="datetime" class="form-control disabled" readonly disabled value="{{ $objective->date_to_be_achived }}" name="date_to_be_achived">
                                             </div>
                                         </div>
                                     </div>

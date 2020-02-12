@@ -15,9 +15,8 @@ class Objective extends Model
         }
     }
 
-
-    public function getCategoryAttribute()
+    public function category()
     {
-        return 'Default';
+        return $this->hasOne('App\ObjectiveCategory', 'id', 'category_id');
     }
 }

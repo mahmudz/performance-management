@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<form action="{{ route('objectives.update', $objective->id) }}" method="post">
+<form action="{{ route('objectives.complete', $objective->id) }}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="_token" value="{{ Session::token() }}">
-    <input type="hidden" name="_method" value="PUT">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">

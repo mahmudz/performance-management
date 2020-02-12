@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use \App\Objective;
+use App\Objective;
+use App\ObjectiveCategory;
 use Illuminate\Http\Request;
 
 class ObjectiveController extends Controller
@@ -16,7 +17,8 @@ class ObjectiveController extends Controller
 
     public function create()
     {
-        return view('pages.objective.create');
+        $categories = ObjectiveCategory::get();
+        return view('pages.objective.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -32,7 +34,7 @@ class ObjectiveController extends Controller
                     $request->except('_token', 'key_result'),
                     [
                         'created_by' => \Auth::id(),
-                        'type' => 1,
+                        'type' => $type,
                         'key_results' => json_encode($request->key_result)
                     ]
                 ));
@@ -53,13 +55,21 @@ class ObjectiveController extends Controller
     public function edit($id)
     {
         $objective = Objective::find($id);
+        $categories = ObjectiveCategory::get();
 
-        return view('pages.objective.edit', compact('objective'));
+        return view('pages.objective.edit', compact('objective', 'categories'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        dd($request->all());
+        try {
+            Objective::where('id', $id)
+                ->update(array_merge($request->except('_token', 'key_result', '_method'), [ 'key_results' => json_encode($request->key_result)]));
+            return redirect()->back()->with('success', 'Objective updated successfully.');
+        } catch (\Exception $e) {
+            return $e;
+            return redirect()->back()->with('danger', $e->getMessage());
+        }
     }
 
     public function delete($id)
@@ -78,5 +88,11 @@ class ObjectiveController extends Controller
         $objective = Objective::find($objectiveID);
 
         return view('pages.objective.mark-as-complete', compact('objective'));
+    }
+
+
+    public function postMarkAsComplete(Request $request)
+    {
+        dd($request->all());
     }
 }

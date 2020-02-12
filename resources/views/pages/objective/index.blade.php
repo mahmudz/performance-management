@@ -2,6 +2,9 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
+        <div class="col-md-12 my-3 text-right">
+            <a href="{{ route('objectives.create') }}" class="btn btn-success">Create new objective</a>
+        </div>
         <div class="col-md-12">
             <table class="table table-hover">
                 <tr>

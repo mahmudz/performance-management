@@ -27,3 +27,12 @@ Route::get('/my-objectives', 'PageController@myObjectives')
 
 Route::get('/core-competencies', 'PageController@coreCompetencies')
     ->name('core-competencies');
+
+Route::post('/add-to-list', 'AjaxController@addToList')
+        ->name('addToList');
+
+Route::post('/remove-from-list', 'AjaxController@removeFromList')
+        ->name('removeFromList');
+
+Route::get('/submissons', 'PageController@submissons')
+        ->name('submissons');

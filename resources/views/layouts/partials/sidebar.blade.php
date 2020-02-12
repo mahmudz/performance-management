@@ -9,7 +9,7 @@
             <li><a href="{{ route('objectives.index') }}">Preset Objectives</a></li>
         @endif
         @if(Auth::user()->type == 2)
-            <li><a href="">Submissions</a></li>
+            <li><a href="{{ route('submissons') }}">Submissions</a></li>
         @endif
         @if(Auth::user()->type == 3)
             <li><a href="{{ route('home') }}">Objective Pool</a></li>

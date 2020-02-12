@@ -8,51 +8,11 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
-                                    <div class="col-6">Leadership</div>
+                                    <div class="col-6">{{ $objective->category->name }}</div>
                                     <div class="col-6 text-right"></div>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-2">
-                                        <img src="https://picsum.photos/120/100" alt="">
-                                    </div>
-                                    <div class="col-5">
-                                        <div class="form-group row">
-                                            <label for="" class="col-md-4 col-form-label">Number</label>
-                                            <div class="col-md-8">
-                                                <input type="text" name="colleague_number" class="form-control" readonly disabled value="{{ $objective->colleague_number }}">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for=""  class="col-md-4 col-form-label">Name</label>
-                                            <div class="col-md-8">
-                                                <input type="text" name="name" class="form-control" readonly disabled value="{{ $objective->name }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-5">
-                                        <div class="form-group row">
-                                            <label for=""  class="col-md-4 col-form-label">Role</label>
-                                            <div class="col-md-8">
-                                                <select name="role" id="" class="form-control" readonly disabled value="{{ $objective->name }}">
-                                                    <option  {{ ($objective->role == 'Software Engineer') ? 'selected' : '' }}  value="Software Engineer">Software Engineer</option>
-                                                    <option  {{ ($objective->role == 'UI Engineer') ? 'selected' : '' }}  value="UI Engineer">UI Engineer</option>
-                                                    <option  {{ ($objective->role == 'Product Manager') ? 'selected' : '' }}  value="Product Manager">Product Manager</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for=""  class="col-md-4 col-form-label">Division</label>
-                                            <div class="col-md-8">
-                                                <select name="division" id="" class="form-control" readonly disabled value="{{ $objective->name }}">
-                                                    <option {{ ($objective->division == 'Tech') ? 'selected' : '' }} value="Tech">Tech</option>
-                                                    <option {{ ($objective->division == 'Marketing') ? 'selected' : '' }} value="Marketing">Marketing</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group row">
@@ -86,12 +46,6 @@
                                     </div>
                                     <div class="col-md-6">
                                         <br>
-                                        <div class="form-group row">
-                                            <label for=""  class="col-md-5 col-form-label">Current Score</label>
-                                            <div class="col-md-7">
-                                                <input type="text" class="form-control" readonly disabled value="{{ $objective->current_score }}" name="current_score">
-                                            </div>
-                                        </div>
                                         <div class="form-group row">
                                             <label for=""  class="col-md-5 col-form-label">Target Score</label>
                                             <div class="col-md-7">

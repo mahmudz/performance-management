@@ -1,36 +1,33 @@
-.dropbox {
-  min-height: 250px;
-  width: 100%;
-  border: 4px dotted #ccc;
-  padding: 5px 0px;
-}
-
-#outer-dropzone {
-  height: 140px;
-}
-
-#inner-dropzone {
-  height: 80px;
-}
-
-.dropzone {
-  background-color: #ccc;
-  border: dashed 4px transparent;
+.objective-source {
+  border: dashed 1px #ccc;
   border-radius: 4px;
-  margin: 10px auto 30px;
-  padding: 10px;
-  width: 80%;
-  transition: background-color 0.3s;
+  margin: 5px 5px;
+  height: 70px;
+}
+.ui-droppable-hover {
+    background: teal !important;
+}
+.objective {
+    border-radius: 3px;
+    box-shadow: 1px 2px 6px 0px #0000001a;
+    padding: 16px;
+    margin: 5px 5px;
+    z-index: 9;
+    background: white;
 }
 
-.drop-active {
-  border-color: #aaa;
+.dropbox {
+/*  min-height: 250px;
+  width: 100%;
+  margin: 5px 5px;*/
 }
-
-.drop-target {
-  border-color: #fff;
-  border-style: solid;
+.dropbox .row .col-md-4 {
+    padding-right: 0px;
+    padding-left: 0px;
 }
-
-.drag-drop {
-  display: inline-block;
+.dropzone {
+  border: dashed 1px #ccc;
+  border-radius: 4px;
+  margin: 5px 5px;
+  height: 70px;
+}
