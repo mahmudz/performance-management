@@ -13,4 +13,10 @@ class AssignedObjective extends Model
     {
         return $this->hasOne('App\Objective', 'id', 'objective_id');
     }
+
+
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'colleague_number');
+    }
 }

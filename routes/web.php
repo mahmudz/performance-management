@@ -20,6 +20,15 @@ Route::get('objectives/{id}/delete', 'ObjectiveController@delete')
 Route::get('/objectives/{id}/complete', 'ObjectiveController@getMarkAsComplete')
         ->name('objectives.complete');
 
+Route::post('/objectives/{id}/approve', 'ObjectiveController@approve')
+        ->name('objectives.approve');
+
+Route::get('/objectives/{id}/deny', 'ObjectiveController@getMarkAsComplete')
+        ->name('objectives.deny');
+
+Route::get('/objectives/{id}/view-submission', 'ObjectiveController@viewSubmission')
+        ->name('objectives.view-submission');
+
 Route::post('/objectives/{id}/complete', 'ObjectiveController@postMarkAsComplete');
 
 Route::get('/my-objectives', 'PageController@myObjectives')

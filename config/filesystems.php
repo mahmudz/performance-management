@@ -64,6 +64,12 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+        'upload' => [
+           'driver' => 'local',
+           'root'   => public_path() . '/',
+           'url' => env('APP_URL').'/public',
+           'visibility' => 'public',
+        ]
     ],
 
 ];

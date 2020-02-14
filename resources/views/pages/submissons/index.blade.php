@@ -7,23 +7,24 @@
                 <tr>
                     <th>#</th>
                     <th>Title</th>
+                    <th>Submitted By</th>
+                    <th>Submitted At</th>
                     <th>Status</th>
-                    <th>Score</th>
                     <th>Actions</th>
                 </tr>
                 @foreach($objectives as $assigned)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $assigned->objective->title }}</td>
+                        <td>{{ $assigned->user->name }}</td>
+                        <td>{{ $assigned->updated_at->format('Y-m-d') }}</td>
                         <td><span class="badge badge-dark">{{ ['Pending', 'Approved', 'Declined', 'Submitted'][$assigned->status] }}</span></td>
-                        <td>{{ ($assigned->achived_score == null) ? 'Not available yet' : $assigned->achived_score }}</td>
                         <td>
-                            @if($assigned->status == 0)
-                                <a href="{{ route('objectives.complete', $assigned->objective->id) }}" class="btn btn-info btn-sm">
-                                    <i class="fa fa-check"></i>
-                                    Mark as complete
-                                </a>
-                            @endif
+                            <a href="{{ route('objectives.view-submission', $assigned->id) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-check"></i>
+                                View
+                            </a>
+
                         </td>
                     </tr>
                 @endforeach

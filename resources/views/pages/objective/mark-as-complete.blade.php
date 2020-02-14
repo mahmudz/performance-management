@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<form action="{{ route('objectives.complete', $objective->id) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('objectives.complete', $assigned->id) }}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="_token" value="{{ Session::token() }}">
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -23,7 +23,7 @@
                                         <div class="form-group row">
                                             <label for="" class="col-md-4 col-form-label">Number</label>
                                             <div class="col-md-8">
-                                                <input type="text" name="colleague_number" class="form-control" value="{{ auth()->id() }}">
+                                                <input type="text" name="colleague_number disabled" readonly disabled class="form-control" value="{{ auth()->id() }}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -60,7 +60,7 @@
                                         <div class="form-group row">
                                             <label for=""  class="col-md-2">Title</label>
                                             <div class="col-md-10">
-                                                <input type="text" class="form-control disabled" disabled readonly value="{{ $objective->title }}" name="title">
+                                                <input type="text" class="form-control disabled" disabled readonly value="{{ $assigned->objective->title }}" name="title">
                                             </div>
                                         </div>
                                     </div>
@@ -69,7 +69,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="">Personal Objective</label>
-                                            <textarea name="personal_objective" class="form-control">{{ $objective->personal_objective }}</textarea>
+                                            <textarea disabled class="form-control disabled" readonly>{{ $assigned->objective->personal_objective }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -77,13 +77,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Key Result</label>
-                                            <input type="text" class="form-control disabled" disabled readonly value="{{ json_decode($objective->key_results)[0] }}" name="key_result[]">
+                                            <input type="text" class="form-control disabled" disabled readonly value="{{ json_decode($assigned->objective->key_results)[0] }}">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control disabled" disabled readonly value="{{ json_decode($objective->key_results)[1] }}" name="key_result[]">
+                                            <input type="text" class="form-control disabled" disabled readonly value="{{ json_decode($assigned->objective->key_results)[1] }}">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control disabled" disabled readonly value="{{ json_decode($objective->key_results)[2] }}" name="key_result[]">
+                                            <input type="text" class="form-control disabled" disabled readonly value="{{ json_decode($assigned->objective->key_results)[2] }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -91,19 +91,19 @@
                                         <div class="form-group row">
                                             <label for=""  class="col-md-4 col-form-label">Target Score</label>
                                             <div class="col-md-8">
-                                                <input type="number" min="1" max="5" step="0.1" readonly disabled class="form-control disabled" value="{{ $objective->target_score }}" name="target_score">
+                                                <input type="number" min="1" max="5" step="0.1" readonly disabled class="form-control disabled" value="{{ $assigned->objective->target_score }}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for=""  class="col-md-4 col-form-label">Expected Score</label>
                                             <div class="col-md-8">
-                                                <input type="number" min="1" max="5" step="0.1" class="form-control" value="{{ $objective->current_score }}" name="current_score">
+                                                <input type="number" min="1" max="5" step="0.1" class="form-control" name="expected_score" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for=""  class="col-md-4 col-form-label">Add evidence</label>
                                             <div class="col-md-8">
-                                                <input type="file" name="evidence">
+                                                <input type="file" name="evidence" required>
                                             </div>
                                         </div>
                                     </div>

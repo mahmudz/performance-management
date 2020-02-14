@@ -2,14 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Objective;
+use App\AssignedObjective;
 use App\ObjectiveCategory;
 use Illuminate\Http\Request;
 
 class ObjectiveController extends Controller
 {
+
     public function index()
     {
+        if (Auth::user()->type == 2) {
+            return redirect()->route('submissons');
+        }
+
+        if (Auth::user()->type == 3) {
+            return redirect()->route('home');
+        }
+
         $objectives = Objective::get();
 
         return view('pages.objective.index', compact('objectives'));
@@ -29,7 +40,7 @@ class ObjectiveController extends Controller
                 $type = 1;
             }
 
-            Objective::create(
+            $objecitve = Objective::create(
                 array_merge(
                     $request->except('_token', 'key_result'),
                     [
@@ -38,6 +49,14 @@ class ObjectiveController extends Controller
                         'key_results' => json_encode($request->key_result)
                     ]
                 ));
+
+            if ($type == 1) {
+                AssignedObjective::firstOrCreate([
+                    'colleague_number' => Auth::id(),
+                    'objective_id' => $objecitve->id,
+                ]);
+                return redirect()->route('home')->with('success', 'New objective created & added to your list.');
+            }
 
             return redirect()->route('objectives.index')->with('success', 'New objective created successfully.');
         } catch (\Exception $e) {
@@ -48,8 +67,9 @@ class ObjectiveController extends Controller
     public function show($id)
     {
         $objective = Objective::find($id);
+        $categories = ObjectiveCategory::get();
 
-        return view('pages.objective.show', compact('objective'));
+        return view('pages.objective.show', compact('objective', 'categories'));
     }
 
     public function edit($id)
@@ -85,14 +105,46 @@ class ObjectiveController extends Controller
 
     public function getMarkAsComplete ($objectiveID)
     {
-        $objective = Objective::find($objectiveID);
+        $assigned = AssignedObjective::where('colleague_number', \Auth::id())
+            ->where('objective_id', $objectiveID)
+            ->first();
 
-        return view('pages.objective.mark-as-complete', compact('objective'));
+        return view('pages.objective.mark-as-complete', compact('assigned'));
     }
 
 
-    public function postMarkAsComplete(Request $request)
+    public function postMarkAsComplete(Request $request, $id)
     {
-        dd($request->all());
+        $assigned = AssignedObjective::where('colleague_number', \Auth::id())
+            ->where('id', $id)
+            ->first();
+
+        $filename                 = $request->file('evidence')->store('files', 'upload');
+        $assigned->name           = $request->name;
+        $assigned->role           = $request->role;
+        $assigned->division       = $request->division;
+        $assigned->expected_score = $request->expected_score;
+        $assigned->evidence       = $filename;
+        $assigned->status         = 3;
+        $assigned->save();
+
+        return redirect()->route('my-objectives')->with('success', 'Submitted for review.');
+    }
+
+
+    public function approve(Request $request, $id)
+    {
+        $submission = AssignedObjective::find($id);
+        $submission->achived_score = $request->achived_score;
+
+    }
+
+    public function viewSubmission($id)
+    {
+        $submission = AssignedObjective::where('status', 3)
+            ->where('id', $id)
+            ->first();
+
+        return view('pages.submissons.view-submission', compact('submission'));
     }
 }

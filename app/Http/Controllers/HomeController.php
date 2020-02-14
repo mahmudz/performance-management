@@ -26,6 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->type == 1) {
+            return redirect()->route('objectives.index');
+        }
+
+        if (Auth::user()->type == 2) {
+            return redirect()->route('submissons');
+        }
         $objectives = Objective::get();
         $totalObjectives = $objectives->count();
 

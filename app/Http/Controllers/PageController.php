@@ -33,6 +33,8 @@ class PageController extends Controller
 
     public function submissons()
     {
-        return view('pages.submissons.index');
+        $objectives = AssignedObjective::where('status', '!=', 0)->get();
+
+        return view('pages.submissons.index', compact('objectives'));
     }
 }
