@@ -17,7 +17,11 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-2">
+                                        @if($assigned->objective->type == 1)
+                                        <img height="90px;" width="90px" src="{{ asset('images/' . $assigned->objective->category->name . '.jpg') }}">
+                                        @else
                                         <img src="https://picsum.photos/120/100" alt="">
+                                        @endif
                                     </div>
                                     <div class="col-5">
                                         <div class="form-group row">
@@ -105,6 +109,12 @@
                                             <div class="col-md-8">
                                                 <input type="file" name="evidence" required>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="">Your comments</label>
+                                            <textarea name="comments" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>

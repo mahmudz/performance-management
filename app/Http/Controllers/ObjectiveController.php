@@ -103,11 +103,15 @@ class ObjectiveController extends Controller
     }
 
 
-    public function getMarkAsComplete ($objectiveID)
+    public function getMarkAsComplete($objectiveID)
     {
         $assigned = AssignedObjective::where('colleague_number', \Auth::id())
             ->where('objective_id', $objectiveID)
             ->first();
+
+        if ($assigned->status != 0) {
+            return redirect()->back()->with('warning', 'This objective already submitted for review.');
+        }
 
         return view('pages.objective.mark-as-complete', compact('assigned'));
     }
@@ -124,6 +128,7 @@ class ObjectiveController extends Controller
         $assigned->role           = $request->role;
         $assigned->division       = $request->division;
         $assigned->expected_score = $request->expected_score;
+        $assigned->comments       = $request->comments;
         $assigned->evidence       = $filename;
         $assigned->status         = 3;
         $assigned->save();
@@ -136,7 +141,6 @@ class ObjectiveController extends Controller
     {
         $submission = AssignedObjective::find($id);
         $submission->achived_score = $request->achived_score;
-
     }
 
     public function viewSubmission($id)

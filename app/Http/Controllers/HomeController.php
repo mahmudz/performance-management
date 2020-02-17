@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Objective;
 use Illuminate\Http\Request;
+use App\ObjectiveCategory;
 use App\AssignedObjective;
 
 class HomeController extends Controller
@@ -33,13 +34,15 @@ class HomeController extends Controller
         if (Auth::user()->type == 2) {
             return redirect()->route('submissons');
         }
+        $categories = ObjectiveCategory::get();
         $objectives = Objective::get();
         $totalObjectives = $objectives->count();
 
         $myAssignedObjectives = AssignedObjective::where('colleague_number', Auth::id())->get();
         $objectives = $objectives->whereNotIn('id', $myAssignedObjectives->pluck('objective_id')->toArray());
+        $objectives = $objectives->values();
 
-        return view('pages.objective-pool.index', compact('objectives', 'myAssignedObjectives', 'totalObjectives'));
+        return view('pages.objective-pool.index', compact('categories', 'objectives', 'myAssignedObjectives', 'totalObjectives'));
     }
 
 

@@ -2,7 +2,7 @@
   border: dashed 1px #ccc;
   border-radius: 4px;
   margin: 5px 5px;
-  height: 70px;
+  min-height: 70px;
 }
 .ui-droppable-hover {
     background: teal !important;
@@ -25,9 +25,13 @@
     padding-right: 0px;
     padding-left: 0px;
 }
+.pool .row .col-md-4 {
+    padding-right: 0px;
+    padding-left: 0px;
+}
 .dropzone {
   border: dashed 1px #ccc;
   border-radius: 4px;
   margin: 5px 5px;
-  height: 70px;
+  min-height: 70px;
 }

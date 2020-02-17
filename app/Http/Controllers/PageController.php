@@ -37,4 +37,20 @@ class PageController extends Controller
 
         return view('pages.submissons.index', compact('objectives'));
     }
+
+
+    public function employees()
+    {
+        $employees = User::get();
+
+        return view('pages.employees.index', compact('employees'));
+    }
+
+
+    public function showEmployee($id)
+    {
+        $employee = User::find($id);
+
+        return view('pages.employees.show', compact($employee));
+    }
 }

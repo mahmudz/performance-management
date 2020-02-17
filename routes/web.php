@@ -45,3 +45,8 @@ Route::post('/remove-from-list', 'AjaxController@removeFromList')
 
 Route::get('/submissons', 'PageController@submissons')
         ->name('submissons');
+
+Route::get('/employees', 'PageController@employees')
+        ->name('employees');
+Route::get('/employees/{id}/show', 'PageController@showEmployee')
+        ->name('employees.show');

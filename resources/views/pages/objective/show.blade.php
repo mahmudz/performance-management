@@ -17,7 +17,12 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-6">
+                                    @if($objective->type == 0)
+                                    <div class="col-md-2">
+                                        <img height="90px;" width="90px" src="{{ asset('images/' . $objective->category->name . '.jpg') }}">
+                                    </div>
+                                    @endif
+                                    <div class="{{ ($objective->type == 0) ? 'col-md-5' : 'col-md-6' }}">
                                         <div class="form-group row">
                                             <label for=""  class="col-md-2">Title</label>
                                             <div class="col-md-10">
@@ -25,7 +30,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="{{ ($objective->type == 0) ? 'col-md-5' : 'col-md-6' }}">
                                         <div class="form-group row">
                                             <label for=""  class="col-md-3">Category</label>
                                             <div class="col-md-9">
